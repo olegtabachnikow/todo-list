@@ -7,7 +7,7 @@ import ToDoList from '../todo-list/ToDoList';
 function App() {
   const [toDoData, setToDoData] = React.useState([]);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const existedData = window.localStorage.getItem('data');
     console.log(existedData);
     existedData && setToDoData(JSON.parse(existedData));
