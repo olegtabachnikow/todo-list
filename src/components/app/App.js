@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Divider } from 'antd';
-import { Content, Header, Footer } from 'antd/es/layout/layout';
+import { Content, Header } from 'antd/es/layout/layout';
 import InputToDo from '../input-to-do/InputToDo';
 import ToDoList from '../todo-list/ToDoList';
 
@@ -9,8 +9,11 @@ function App() {
 
   React.useEffect(() => {
     const existedData = window.localStorage.getItem('data');
-    console.log(existedData);
-    existedData && setToDoData(JSON.parse(existedData));
+    console.log(JSON.parse(existedData));
+    if (existedData) {
+      const parsedTodos = JSON.parse(existedData);
+      setToDoData(parsedTodos.filter((el) => el.expired > Date.now()));
+    }
   }, []);
 
   React.useEffect(() => {
@@ -32,7 +35,6 @@ function App() {
           <ToDoList toDoData={toDoData} setToDoData={setToDoData} />
         </Content>
       </Layout>
-      <Footer></Footer>
     </div>
   );
 }

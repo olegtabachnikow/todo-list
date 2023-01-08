@@ -9,7 +9,7 @@ function InputToDo({ setToDoData }) {
       {
         text: inputText,
         done: false,
-        createdAt: new Date(),
+        expired: Date.now() + 30 * 24 * 60 * 60 * 1000,
       },
     ]);
     setInputText('');
